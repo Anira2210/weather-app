@@ -65,3 +65,20 @@ a {
 .unit-img {
   width: 40px;
 }
+button {
+  background-color: #8c84bc;
+  color: #fff;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 15px;
+  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
+  transition: all 200ms ease-in-out;
+}
+
+button:hover {
+  background-color: #67608b;
+
+  color: white;
+  border: 0px;
+  cursor: pointer;
+}
