@@ -46,7 +46,7 @@ function showWeatherCondition(response) {
   document.querySelector(
     "#city-location"
   ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
-  document.querySelector("#degree").innerHTML = `${temp}°C`;
+  document.querySelector("#degree").innerHTML = `${temp}°`;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
@@ -64,9 +64,8 @@ function showWeatherCondition(response) {
 
   function fahrUnit(event) {
     event.preventDefault();
-    document.querySelector("#degree").innerHTML = Math.round(
-      (temp * 9) / 5 + 32
-    );
+    let fahrTemp = Math.round((temp * 9) / 5 + 32);
+    document.querySelector("#degree").innerHTML = `${fahrTemp}°`;
   }
   let fahrLink = document.querySelector("#fahr-link");
   fahrLink.addEventListener("click", fahrUnit);
