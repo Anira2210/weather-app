@@ -34,7 +34,6 @@ function searchCity(city) {
 }
 
 function handleSubmit(event) {
-  debugger;
   event.preventDefault();
   let city = document.querySelector("#inlineFormInputGroupUsername").value;
   searchCity(city);
@@ -51,6 +50,7 @@ function showWeatherCondition(response) {
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
+
   document.querySelector("#condition").innerHTML =
     response.data.weather[0].main;
 
