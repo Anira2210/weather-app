@@ -96,3 +96,12 @@ button:focus {
 .unit-link:focus {
   text-decoration: underline;
 }
+.flaticon-attribute {
+  text-align: center;
+  font-size: 12px;
+}
+
+.github-link {
+  text-align: center;
+  font-size: 12px;
+}
