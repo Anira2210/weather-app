@@ -50,31 +50,42 @@ function showWeatherCondition(response) {
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
-  document.querySelector("#temp-max").innerHTML = Math.round(
-    response.data.main.temp_max
-  );
-  document.querySelector("#temp-min").innerHTML = Math.round(
-    response.data.main.temp_min
-  );
+  let tempMax = Math.round(response.data.main.temp_max);
+  document.querySelector("#temp-max").innerHTML = `${tempMax}°C`;
+
+  let tempMin = Math.round(response.data.main.temp_min);
+  document.querySelector("#temp-min").innerHTML = `${tempMin}°C`;
 
   document.querySelector("#condition").innerHTML =
     response.data.weather[0].main;
 
-  function celciusUnit(event) {
+  function tempToCelcius(event) {
     event.preventDefault();
     document.querySelector("#degree").innerHTML = `${temp}°`;
   }
 
-  let celciusLink = document.querySelector("#celcius-link");
-  celciusLink.addEventListener("click", celciusUnit);
+  function tempToCelciusMax(event) {
+    event.preventDefault();
+    document.querySelector("#temp-max").innerHTML = `${tempMax}°C`;
+  }
 
-  function fahrUnit(event) {
+  let celciusLink = document.querySelector("#celcius-link");
+  celciusLink.addEventListener("click", tempToCelcius, tempToCelciusMax);
+
+  function tempToFahr(event) {
     event.preventDefault();
     let fahrTemp = Math.round((temp * 9) / 5 + 32);
     document.querySelector("#degree").innerHTML = `${fahrTemp}°`;
   }
+
+  function tempToFahrMax(event) {
+    event.preventDefault();
+    let tempMaxFahr = Math.round((tempMax * 9) / 5 + 32);
+    document.querySelector("#temp-max").innerHTML = `${tempMaxFahr}°F`;
+  }
+
   let fahrLink = document.querySelector("#fahr-link");
-  fahrLink.addEventListener("click", fahrUnit);
+  fahrLink.addEventListener("click", tempToFahr, tempToFahrMax);
 }
 
 //Current Location Button
