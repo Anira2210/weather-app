@@ -30,46 +30,48 @@
     />
     <link rel="stylesheet" href="src/style.css" />
   </head>
-
   <body>
     <div class="container outer-box">
-      <div class="row header-row"><h1>WEATHER FORECAST</h1></div>
-      <div class="row">
-        <div class="col-8">
-          <form
-            id="search-form"
-            class="row row-cols-lg-auto g-3 align-items-center"
-          >
-            <div class="col-12">
-              <div class="input-group">
-                <div class="input-group-text">
-                  <i class="fas fa-search"></i>
-                </div>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inlineFormInputGroupUsername"
-                  placeholder="LOCATION"
-                />
-              </div>
+      <div class="row" style="height: 80px">
+        <div class="col">
+          <div class="input-group mb-3" id="search-form">
+            <input
+              id="input"
+              type="text"
+              class="form-control"
+              placeholder="LOCATION"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="button-addon2"
+              >
+                <i class="fas fa-search"></i>
+              </button>
             </div>
-            <div class="col-12">
-              <button type="submit">Go</button>
-            </div>
-          </form>
+          </div>
         </div>
-        <div class="col-4">
+
+        <div class="col">
           <div class="d-grid gap-2 d-md-block">
             <button id="button-current-location">Current Location</button>
           </div>
         </div>
       </div>
+
+      <div class="row" style="height: 80px">
+        <div class="col">
+          <h1>
+            <i class="fas fa-map-pin"></i>
+            <span id="city-location"></span>
+            <div class="current-date" id="current-date"></div>
+          </h1>
+        </div>
+      </div>
       <div class="row">
-        <h2>
-          <i class="fas fa-map-pin"></i>
-          <span id="city-location"></span>
-          <div class="current-date" id="current-date"></div>
-        </h2>
         <div class="col-4">
           <div class="row h-50">
             <img
@@ -81,7 +83,7 @@
           </div>
         </div>
         <div class="col-4">
-          <div class="row h-50">
+          <div class="row">
             <div class="col">
               <span>
                 <a href="#" id="celcius-link" class="unit-link">C |</a>
@@ -162,16 +164,17 @@
         </div>
       </div>
     </div>
+
     <div class="github-link">
-      My GitHub repository
-      <a href="https://github.com/Anira2210/weather-app"> here</a> | Icons made
-      by
+      <a href="https://github.com/Anira2210/weather-app"> Open-source code</a>
+      by Katharina Wagner | Icons made by
       <a href="https://www.flaticon.com/authors/fjstudio" title="fjstudio"
         >fjstudio</a
       >
       from
       <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
     </div>
+
     <script src="src/script.js"></script>
   </body>
 </html>

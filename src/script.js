@@ -35,7 +35,7 @@ function searchCity(city) {
 
 function handleSubmit(event) {
   event.preventDefault();
-  let city = document.querySelector("#inlineFormInputGroupUsername").value;
+  let city = document.querySelector("#input").value;
   searchCity(city);
 }
 
@@ -78,14 +78,13 @@ function showWeatherCondition(response) {
     document.querySelector("#degree").innerHTML = `${fahrTemp}°`;
   }
 
-  function tempToFahrMax(event) {
-    event.preventDefault();
-    let tempMaxFahr = Math.round((tempMax * 9) / 5 + 32);
-    document.querySelector("#temp-max").innerHTML = `${tempMaxFahr}°F`;
-  }
+  // function tempToFahrMax(event) {
+  // event.preventDefault();
+  //let tempMaxFahr = Math.round((tempMax * 9) / 5 + 32);
+  //document.querySelector("#temp-max").innerHTML = `${tempMaxFahr}°F`; }
 
   let fahrLink = document.querySelector("#fahr-link");
-  fahrLink.addEventListener("click", tempToFahr, tempToFahrMax);
+  fahrLink.addEventListener("click", tempToFahr);
 }
 
 //Current Location Button
@@ -104,7 +103,7 @@ function getCurrentLocation(event) {
 }
 
 let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", handleSubmit);
+searchForm.addEventListener("click", handleSubmit);
 
 let locationButton = document.querySelector("#button-current-location");
 locationButton.addEventListener("click", getCurrentLocation);
