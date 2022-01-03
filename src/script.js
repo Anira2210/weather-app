@@ -20,8 +20,8 @@ if (minutes < 10) {
 
 let currentDate = `${day}, ${hour}:${minutes}`;
 
-let dateTime = document.querySelector("#current-date");
-dateTime.innerHTML = currentDate;
+//let dateTime = document.querySelector("#current-date");
+//dateTime.innerHTML = currentDate;
 
 //Search Engine
 //display location
@@ -39,38 +39,65 @@ function handleSubmit(event) {
   searchCity(city);
 }
 
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0` + hours;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0` + minutes;
+  }
+  let days = [
+    `Sunday`,
+    `Monday`,
+    `Tuesday`,
+    `Wednesday`,
+    `Thursday`,
+    `Friday`,
+    `Saturday`,
+  ];
+  let day = days[now.getDay()];
+  return `${day} ${hours}:${minutes}`;
+}
+
 function showWeatherCondition(response) {
   console.log(response.data);
   let temp = Math.round(response.data.main.temp);
+  document.querySelector("#degree").innerHTML = `${temp}°`;
+
   document.querySelector(
     "#city-location"
   ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
-  document.querySelector("#degree").innerHTML = `${temp}°`;
+  document.querySelector("#condition").innerHTML =
+    response.data.weather[0].main;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
+
+  document.querySelector("#current-date").innerHTML = formatDate(
+    response.data.dt * 1000
+  );
+
+  document
+    .querySelector("#large-icon")
+    .setAttribute("src", "images/new/002-sunny.png");
+
   let tempMax = Math.round(response.data.main.temp_max);
   document.querySelector("#temp-max").innerHTML = `${tempMax}°C`;
 
   let tempMin = Math.round(response.data.main.temp_min);
   document.querySelector("#temp-min").innerHTML = `${tempMin}°C`;
 
-  document.querySelector("#condition").innerHTML =
-    response.data.weather[0].main;
-
   function tempToCelcius(event) {
     event.preventDefault();
     document.querySelector("#degree").innerHTML = `${temp}°`;
   }
 
-  function tempToCelciusMax(event) {
-    event.preventDefault();
-    document.querySelector("#temp-max").innerHTML = `${tempMax}°C`;
-  }
-
   let celciusLink = document.querySelector("#celcius-link");
-  celciusLink.addEventListener("click", tempToCelcius, tempToCelciusMax);
+  celciusLink.addEventListener("click", tempToCelcius);
 
   function tempToFahr(event) {
     event.preventDefault();
