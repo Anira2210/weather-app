@@ -1,31 +1,3 @@
-//Time and Date
-
-let now = new Date();
-
-let days = [
-  `Sunday`,
-  `Monday`,
-  `Tuesday`,
-  `Wednesday`,
-  `Thursday`,
-  `Friday`,
-  `Saturday`,
-];
-let day = days[now.getDay()];
-let hour = now.getHours();
-let minutes = now.getMinutes();
-if (minutes < 10) {
-  minutes = `0` + minutes;
-}
-
-let currentDate = `${day}, ${hour}:${minutes}`;
-
-//let dateTime = document.querySelector("#current-date");
-//dateTime.innerHTML = currentDate;
-
-//Search Engine
-//display location
-
 function searchCity(city) {
   let apiKey = "66c2f30e54854e19ab4716b39d0f033f";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -58,12 +30,11 @@ function formatDate(timestamp) {
     `Friday`,
     `Saturday`,
   ];
-  let day = days[now.getDay()];
+  let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
 
 function showWeatherCondition(response) {
-  console.log(response.data);
   let temp = Math.round(response.data.main.temp);
   document.querySelector("#degree").innerHTML = `${temp}°`;
 
@@ -76,14 +47,16 @@ function showWeatherCondition(response) {
   document.querySelector("#wind-speed").innerHTML = Math.round(
     response.data.wind.speed
   );
-
   document.querySelector("#current-date").innerHTML = formatDate(
     response.data.dt * 1000
   );
 
   document
     .querySelector("#large-icon")
-    .setAttribute("src", "images/new/002-sunny.png");
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
 
   let tempMax = Math.round(response.data.main.temp_max);
   document.querySelector("#temp-max").innerHTML = `${tempMax}°C`;
