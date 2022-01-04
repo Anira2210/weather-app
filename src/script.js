@@ -47,9 +47,13 @@ function showWeatherCondition(response) {
 
   let tempMax = Math.round(response.data.main.temp_max);
   document.querySelector("#temp-max").innerHTML = `${tempMax}°C`;
+  celciusTempMax = Math.round(response.data.main.temp_max);
+  console.log(celciusTempMax);
 
   let tempMin = Math.round(response.data.main.temp_min);
   document.querySelector("#temp-min").innerHTML = `${tempMin}°C`;
+  celciusTempMin = Math.round(response.data.main.temp_min);
+  console.log(celciusTempMin);
 }
 
 function searchCity(city) {
@@ -76,7 +80,22 @@ function tempToFahr(event) {
   document.querySelector("#degree").innerHTML = `${fahrTemp}°`;
 }
 
+function tempToFahrMax(event) {
+  event.preventDefault();
+
+  let tempMaxFahr = Math.round((celciusTempMax * 9) / 5 + 32);
+  document.querySelector("#temp-max").innerHTML = `${tempMaxFahr}°F`;
+}
+
+function tempToCelciusMax(event) {
+  event.preventDefault();
+  let tempMaxCelcius = celciusTempMax;
+  document.querySelector("#temp-max").innerHTML = `${tempMaxCelcius}°F`;
+}
+
 let celciusTemp = null; //global variable
+let celciusTempMax = null; //global variable
+let celciusTempMin = null; //global variable
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("click", handleSubmit);
@@ -84,8 +103,14 @@ searchForm.addEventListener("click", handleSubmit);
 let celciusLink = document.querySelector("#celcius-link");
 celciusLink.addEventListener("click", tempToCelcius);
 
+let celciusLinkMax = document.querySelector("#celcius-link");
+celciusLinkMax.addEventListener("click", tempToCelciusMax);
+
 let fahrLink = document.querySelector("#fahr-link");
 fahrLink.addEventListener("click", tempToFahr);
+
+let fahrLinkMax = document.querySelector("#fahr-link");
+fahrLinkMax.addEventListener("click", tempToFahrMax);
 
 searchCity("Berlin");
 
@@ -104,8 +129,3 @@ function getCurrentLocation(event) {
 
 let locationButton = document.querySelector("#button-current-location");
 locationButton.addEventListener("click", getCurrentLocation);
-
-// function tempToFahrMax(event) {
-// event.preventDefault();
-//let tempMaxFahr = Math.round((tempMax * 9) / 5 + 32);
-//document.querySelector("#temp-max").innerHTML = `${tempMaxFahr}°F`; }
