@@ -97,7 +97,7 @@ function tempToFahrMax(event) {
 function tempToCelciusMax(event) {
   event.preventDefault();
   let tempMaxCelcius = celciusTempMax;
-  document.querySelector("#temp-max").innerHTML = `${tempMaxCelcius}°F`;
+  document.querySelector("#temp-max").innerHTML = `${tempMaxCelcius}°C`;
 }
 
 function feelsLikeTempToFahr(event) {
@@ -109,7 +109,7 @@ function feelsLikeTempToFahr(event) {
 function feelsLikeTempToCelcius(event) {
   event.preventDefault();
   let feelsLikeCelcius = Math.round(celciusTempFeelsLike);
-  document.querySelector("#feels-like").innerHTML = `${feelsLikeCelcius}°F`;
+  document.querySelector("#feels-like").innerHTML = `${feelsLikeCelcius}°C`;
 }
 
 let celciusTemp = null; //global variable
