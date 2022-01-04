@@ -126,6 +126,9 @@ celciusLink.addEventListener("click", tempToCelcius);
 let celciusLinkMax = document.querySelector("#celcius-link");
 celciusLinkMax.addEventListener("click", tempToCelciusMax);
 
+let celciusLinkFeel = document.querySelector("#celcius-link");
+celciusLinkFeel.addEventListener("click", feelsLikeTempToCelcius);
+
 let fahrLink = document.querySelector("#fahr-link");
 fahrLink.addEventListener("click", tempToFahr);
 
@@ -134,9 +137,6 @@ fahrLinkMax.addEventListener("click", tempToFahrMax);
 
 let fahrLinkFeel = document.querySelector("#fahr-link");
 fahrLinkFeel.addEventListener("click", feelsLikeTempToFahr);
-
-let celciusLinkFeel = document.querySelector("#celcius-link");
-celciusLinkFeel.addEventListener("click", feelsLikeTempToCelcius);
 
 searchCity("Berlin");
 
