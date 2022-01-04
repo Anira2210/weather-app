@@ -24,7 +24,7 @@ function formatDate(timestamp) {
 function showWeatherCondition(response) {
   let temp = Math.round(response.data.main.temp);
   celciusTemp = Math.round(response.data.main.temp);
-
+  console.log(response.data.main.feels_like);
   document.querySelector("#degree").innerHTML = temp;
   document.querySelector(
     "#city-location"
@@ -38,6 +38,9 @@ function showWeatherCondition(response) {
   document.querySelector("#current-date").innerHTML = formatDate(
     response.data.dt * 1000
   );
+  document.querySelector("#feels-like").innerHTML = `${Math.round(
+    response.data.main.feels_like
+  )}°C`;
   document
     .querySelector("#large-icon")
     .setAttribute(
@@ -48,12 +51,10 @@ function showWeatherCondition(response) {
   let tempMax = Math.round(response.data.main.temp_max);
   document.querySelector("#temp-max").innerHTML = `${tempMax}°C`;
   celciusTempMax = Math.round(response.data.main.temp_max);
-  console.log(celciusTempMax);
 
   let tempMin = Math.round(response.data.main.temp_min);
   document.querySelector("#temp-min").innerHTML = `${tempMin}°C`;
   celciusTempMin = Math.round(response.data.main.temp_min);
-  console.log(celciusTempMin);
 }
 
 function searchCity(city) {
