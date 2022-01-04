@@ -24,7 +24,6 @@ function formatDate(timestamp) {
 function showWeatherCondition(response) {
   let temp = Math.round(response.data.main.temp);
   celciusTemp = Math.round(response.data.main.temp);
-  console.log(response.data.main.feels_like);
   document.querySelector("#degree").innerHTML = temp;
   document.querySelector(
     "#city-location"
@@ -41,6 +40,7 @@ function showWeatherCondition(response) {
   document.querySelector("#feels-like").innerHTML = `${Math.round(
     response.data.main.feels_like
   )}°C`;
+  celciusTempFeelsLike = Math.round(response.data.main.feels_like);
   document
     .querySelector("#large-icon")
     .setAttribute(
@@ -100,9 +100,22 @@ function tempToCelciusMax(event) {
   document.querySelector("#temp-max").innerHTML = `${tempMaxCelcius}°F`;
 }
 
+function feelsLikeTempToFahr(event) {
+  event.preventDefault();
+  let feelsLikeFahr = Math.round((celciusTempFeelsLike * 9) / 5 + 32);
+  document.querySelector("#feels-like").innerHTML = `${feelsLikeFahr}°F`;
+}
+
+function feelsLikeTempToCelcius(event) {
+  event.preventDefault();
+  let feelsLikeCelcius = Math.round(celciusTempFeelsLike);
+  document.querySelector("#feels-like").innerHTML = `${feelsLikeCelcius}°F`;
+}
+
 let celciusTemp = null; //global variable
 let celciusTempMax = null; //global variable
 let celciusTempMin = null; //global variable
+let celciusTempFeelsLike = null; //global variable
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("click", handleSubmit);
@@ -118,6 +131,12 @@ fahrLink.addEventListener("click", tempToFahr);
 
 let fahrLinkMax = document.querySelector("#fahr-link");
 fahrLinkMax.addEventListener("click", tempToFahrMax);
+
+let fahrLinkFeel = document.querySelector("#fahr-link");
+fahrLinkFeel.addEventListener("click", feelsLikeTempToFahr);
+
+let celciusLinkFeel = document.querySelector("#celcius-link");
+celciusLinkFeel.addEventListener("click", feelsLikeTempToCelcius);
 
 searchCity("Berlin");
 
