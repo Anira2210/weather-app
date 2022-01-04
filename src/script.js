@@ -1,16 +1,3 @@
-function searchCity(city) {
-  let apiKey = "66c2f30e54854e19ab4716b39d0f033f";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-  axios.get(apiUrl).then(showWeatherCondition);
-}
-
-function handleSubmit(event) {
-  event.preventDefault();
-  let city = document.querySelector("#input").value;
-  searchCity(city);
-}
-
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -36,8 +23,9 @@ function formatDate(timestamp) {
 
 function showWeatherCondition(response) {
   let temp = Math.round(response.data.main.temp);
-  document.querySelector("#degree").innerHTML = `${temp}°`;
+  celciusTemp = Math.round(response.data.main.temp);
 
+  document.querySelector("#degree").innerHTML = `${temp}°`;
   document.querySelector(
     "#city-location"
   ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
@@ -50,7 +38,6 @@ function showWeatherCondition(response) {
   document.querySelector("#current-date").innerHTML = formatDate(
     response.data.dt * 1000
   );
-
   document
     .querySelector("#large-icon")
     .setAttribute(
@@ -63,34 +50,47 @@ function showWeatherCondition(response) {
 
   let tempMin = Math.round(response.data.main.temp_min);
   document.querySelector("#temp-min").innerHTML = `${tempMin}°C`;
-
-  function tempToCelcius(event) {
-    event.preventDefault();
-    document.querySelector("#degree").innerHTML = `${temp}°`;
-  }
-
-  let celciusLink = document.querySelector("#celcius-link");
-  celciusLink.addEventListener("click", tempToCelcius);
-
-  function tempToFahr(event) {
-    event.preventDefault();
-    let fahrTemp = Math.round((temp * 9) / 5 + 32);
-    document.querySelector("#degree").innerHTML = `${fahrTemp}°`;
-  }
-
-  // function tempToFahrMax(event) {
-  // event.preventDefault();
-  //let tempMaxFahr = Math.round((tempMax * 9) / 5 + 32);
-  //document.querySelector("#temp-max").innerHTML = `${tempMaxFahr}°F`; }
-
-  let fahrLink = document.querySelector("#fahr-link");
-  fahrLink.addEventListener("click", tempToFahr);
 }
+
+function searchCity(city) {
+  let apiKey = "66c2f30e54854e19ab4716b39d0f033f";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showWeatherCondition);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#input").value;
+  searchCity(city);
+}
+
+function tempToCelcius(event) {
+  event.preventDefault();
+  document.querySelector("#degree").innerHTML = `${celciusTemp}°`;
+}
+
+function tempToFahr(event) {
+  event.preventDefault();
+  let fahrTemp = Math.round((celciusTemp * 9) / 5 + 32);
+  document.querySelector("#degree").innerHTML = `${fahrTemp}°`;
+}
+
+let celciusTemp = null; //global variable
+
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("click", handleSubmit);
+
+let celciusLink = document.querySelector("#celcius-link");
+celciusLink.addEventListener("click", tempToCelcius);
+
+let fahrLink = document.querySelector("#fahr-link");
+fahrLink.addEventListener("click", tempToFahr);
+
+searchCity("Berlin");
 
 //Current Location Button
 function searchLocation(position) {
-  console.log(position);
-
   let apiKey = "66c2f30e54854e19ab4716b39d0f033f";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
 
@@ -102,10 +102,10 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
 
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("click", handleSubmit);
-
 let locationButton = document.querySelector("#button-current-location");
 locationButton.addEventListener("click", getCurrentLocation);
 
-searchCity("Berlin");
+// function tempToFahrMax(event) {
+// event.preventDefault();
+//let tempMaxFahr = Math.round((tempMax * 9) / 5 + 32);
+//document.querySelector("#temp-max").innerHTML = `${tempMaxFahr}°F`; }
