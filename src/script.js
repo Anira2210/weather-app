@@ -25,7 +25,7 @@ function showWeatherCondition(response) {
   let temp = Math.round(response.data.main.temp);
   celciusTemp = Math.round(response.data.main.temp);
 
-  document.querySelector("#degree").innerHTML = `${temp}°`;
+  document.querySelector("#degree").innerHTML = temp;
   document.querySelector(
     "#city-location"
   ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
@@ -71,13 +71,19 @@ function handleSubmit(event) {
 
 function tempToCelcius(event) {
   event.preventDefault();
-  document.querySelector("#degree").innerHTML = `${celciusTemp}°`;
+  celciusLink.classList.add("active");
+  fahrLink.classList.remove("active");
+
+  document.querySelector("#degree").innerHTML = celciusTemp;
 }
 
 function tempToFahr(event) {
   event.preventDefault();
+  celciusLink.classList.remove("active");
+  fahrLink.classList.add("active");
+
   let fahrTemp = Math.round((celciusTemp * 9) / 5 + 32);
-  document.querySelector("#degree").innerHTML = `${fahrTemp}°`;
+  document.querySelector("#degree").innerHTML = fahrTemp;
 }
 
 function tempToFahrMax(event) {

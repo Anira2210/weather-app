@@ -10,10 +10,6 @@ form {
   margin: 5px auto 20px;
 }
 
-a {
-  text-decoration: none;
-}
-
 .current-date {
   font-size: 16px;
 }
@@ -97,17 +93,27 @@ button:focus {
 }
 
 .unit-link {
-  font-weight: bold;
-  color: #494369;
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
   bottom: 30px;
   right: 4px;
+  text-decoration: none;
 }
-
-.unit-link:focus {
+.unit-link:hover {
   text-decoration: underline;
 }
+
+.active {
+  color: #204051;
+  cursor: default;
+  font-weight: bold;
+}
+
+.active:hover {
+  color: #204051;
+  text-decoration: none;
+}
+
 .flaticon-attribute {
   text-align: center;
   font-size: 12px;
