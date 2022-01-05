@@ -21,6 +21,23 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  forecastElement.innerHTML = `        
+  <div class="row">
+    <div class="col-2">
+      <div class="forecast-date">Mon</div>
+      <img src="images/005-cloudy.png" alt="" class="forecast-icon" />
+      <div>
+        <span class="forecast-maximum-temp">6°</span
+        ><span class="forecast-minimum-temp"> 0°</span>
+      </div>
+    </div>
+  </div>
+`;
+}
+
 function showWeatherCondition(response) {
   let temp = Math.round(response.data.main.temp);
   celciusTemp = Math.round(response.data.main.temp);
@@ -111,6 +128,8 @@ function feelsLikeTempToCelcius(event) {
   let feelsLikeCelcius = Math.round(celciusTempFeelsLike);
   document.querySelector("#feels-like").innerHTML = `${feelsLikeCelcius}°C`;
 }
+
+displayForecast();
 
 let celciusTemp = null; //global variable
 let celciusTempMax = null; //global variable
