@@ -116,6 +116,9 @@ button:focus {
   width: 30px;
   margin: 10px;
 }
+.forecast-minimum-temp {
+  opacity: 0.5;
+}
 
 .flaticon-attribute {
   text-align: center;
