@@ -24,18 +24,29 @@ function formatDate(timestamp) {
 function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
 
-  forecastElement.innerHTML = `        
-  <div class="row">
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `        
+  
     <div class="col-2">
-      <div class="forecast-date">Mon</div>
+      <div class="forecast-date">${day}</div>
       <img src="images/005-cloudy.png" alt="" class="forecast-icon" />
       <div>
         <span class="forecast-maximum-temp">6°</span
         ><span class="forecast-minimum-temp"> 0°</span>
       </div>
     </div>
-  </div>
+
 `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+  console.log(forecastHTML);
 }
 
 function showWeatherCondition(response) {
