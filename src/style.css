@@ -9,31 +9,26 @@ h1 {
 form {
   margin: 5px auto 20px;
 }
+button {
+  background-color: #8c84bc;
+  color: #fff;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 15px;
+  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
+  transition: all 200ms ease-in-out;
+}
 
-.current-date {
-  font-size: 16px;
+button:hover {
+  background-color: #67608b;
+  color: white;
+  border: 0px;
+  cursor: pointer;
 }
-.degree {
-  font-size: 56px;
-  font-weight: bold;
+button:focus {
+  background-color: #494369;
 }
 
-.small-box {
-  border-radius: 5px;
-  background-color: #fff;
-  color: #204051;
-  margin: 16px 5px 0;
-  text-align: center;
-  padding: 5px;
-}
-.small-icon {
-  width: 30px;
-  margin: 10px;
-}
-.large-icon {
-  width: 140px;
-  margin: 20px 5px;
-}
 .outer-box {
   max-width: 600px;
   margin-top: 20px;
@@ -43,12 +38,6 @@ form {
   border-color: #dae7e9;
   border-radius: 5px;
   background-color: #fff;
-}
-.weather-status {
-  line-height: 280%;
-}
-.icon-status {
-  width: 24px;
 }
 
 .search-form-button {
@@ -71,25 +60,26 @@ form {
   background-color: #494369;
 }
 
-button {
-  background-color: #8c84bc;
-  color: #fff;
-  padding: 8px 10px;
-  border: 0;
-  border-radius: 15px;
-  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
-  transition: all 200ms ease-in-out;
+.current-date {
+  font-size: 16px;
 }
 
-button:hover {
-  background-color: #67608b;
-
-  color: white;
-  border: 0px;
-  cursor: pointer;
+.degree {
+  font-size: 56px;
+  font-weight: bold;
 }
-button:focus {
-  background-color: #494369;
+
+.weather-icon {
+  width: 140px;
+  margin: 20px 5px;
+}
+
+.weather-status {
+  line-height: 280%;
+}
+
+.weather-status-icon {
+  width: 24px;
 }
 
 .unit-link {
@@ -112,6 +102,19 @@ button:focus {
 .active:hover {
   color: #204051;
   text-decoration: none;
+}
+
+.forecast {
+  border-radius: 5px;
+  background-color: #fff;
+  color: #204051;
+  margin: 16px 5px 0;
+  text-align: center;
+  padding: 5px;
+}
+.forecast-icon {
+  width: 30px;
+  margin: 10px;
 }
 
 .flaticon-attribute {

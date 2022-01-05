@@ -42,7 +42,7 @@ function showWeatherCondition(response) {
   )}°C`;
   celciusTempFeelsLike = Math.round(response.data.main.feels_like);
   document
-    .querySelector("#large-icon")
+    .querySelector("#weather-icon")
     .setAttribute(
       "src",
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
