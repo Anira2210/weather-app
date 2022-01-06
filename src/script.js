@@ -21,7 +21,8 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"];
@@ -46,7 +47,12 @@ function displayForecast() {
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  console.log(forecastHTML);
+}
+
+function getForecast(coordinates) {
+  let apiKey = "66c2f30e54854e19ab4716b39d0f033f";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function showWeatherCondition(response) {
@@ -83,6 +89,8 @@ function showWeatherCondition(response) {
   let tempMin = Math.round(response.data.main.temp_min);
   document.querySelector("#temp-min").innerHTML = `${tempMin}°C`;
   celciusTempMin = Math.round(response.data.main.temp_min);
+
+  getForecast(response.data.coord);
 }
 
 function searchCity(city) {
@@ -139,8 +147,6 @@ function feelsLikeTempToCelcius(event) {
   let feelsLikeCelcius = Math.round(celciusTempFeelsLike);
   document.querySelector("#feels-like").innerHTML = `${feelsLikeCelcius}°C`;
 }
-
-displayForecast();
 
 let celciusTemp = null; //global variable
 let celciusTempMax = null; //global variable
