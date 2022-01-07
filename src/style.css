@@ -70,9 +70,12 @@ button:focus {
 
 .weather-icon {
   width: 140px;
-  margin: 10px 5px;
+  margin: 0 auto;
 }
 
+.condition {
+  text-align: center;
+}
 .weather-status {
   line-height: 280%;
   padding: 0;

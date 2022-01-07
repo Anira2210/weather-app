@@ -40,9 +40,9 @@ function displayForecast(response) {
         `
     <div class="col-2 forecast-day">
       <div class="forecast-date">${formatDay(forecastDay.dt)}</div>
-      <img src="http://openweathermap.org/img/wn/${
+      <img src="images/${
         forecastDay.weather[0].icon
-      }@2x.png" alt="" class="forecast-icon" />
+      }.png" alt="" class="forecast-icon" />
       <div>
         <span class="forecast-maximum-temp">${Math.round(
           forecastDay.temp.max
@@ -68,6 +68,7 @@ function getForecast(coordinates) {
 
 function showWeatherCondition(response) {
   let temp = Math.round(response.data.main.temp);
+
   celciusTemp = Math.round(response.data.main.temp);
   document.querySelector("#degree").innerHTML = temp;
   document.querySelector(
@@ -86,12 +87,10 @@ function showWeatherCondition(response) {
     response.data.main.feels_like
   )}°C`;
   celciusTempFeelsLike = Math.round(response.data.main.feels_like);
+
   document
     .querySelector("#weather-icon")
-    .setAttribute(
-      "src",
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
+    .setAttribute("src", `images/${response.data.weather[0].icon}.png`);
 
   let tempMax = Math.round(response.data.main.temp_max);
   document.querySelector("#temp-max").innerHTML = `${tempMax}°C`;
