@@ -1,3 +1,4 @@
+//defines the current time
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -21,12 +22,29 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function formatDateSun(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0` + hours;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0` + minutes;
+  }
+
+  return `${hours}:${minutes}`;
+}
+
+//defines the weekdays for the forecast
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
   let days = [`Sun`, `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`];
   return days[day];
 }
+
+// 5. Forecast function - loops through the forecast HTML part and displays the forecast
 function displayForecast(response) {
   let forecast = response.data.daily;
 
@@ -39,7 +57,7 @@ function displayForecast(response) {
         forecastHTML +
         `
     <div class="col-2 forecast-day">
-      <div class="forecast-date">${formatDay(forecastDay.dt)}</div>
+      <div class="forecast-date">${formatDay(forecastDay.dt)}</div> 
       <img src="images/${
         forecastDay.weather[0].icon
       }.png" alt="" class="forecast-icon" />
@@ -60,49 +78,48 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
+// 4. Forecast API: gets forecast data from openweather and calls the function that displays the forecast
 function getForecast(coordinates) {
   let apiKey = "66c2f30e54854e19ab4716b39d0f033f";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
+//3. defines all the HTML elements and displays it- calls the forecast functions
 function showWeatherCondition(response) {
-  let temp = Math.round(response.data.main.temp);
+  console.log(response.data);
+  let temp = document.querySelector("#degree");
+  let city = document.querySelector("#city-location");
+  let condition = document.querySelector("#condition");
+  let humidity = document.querySelector("#humidity");
+  let windSpeed = document.querySelector("#wind-speed");
+  let pressure = document.querySelector("#pressure");
+  let currentDate = document.querySelector("#current-date");
+  let feelsLikeTemp = document.querySelector("#feels-like");
+  let weatherIcon = document.querySelector("#weather-icon");
 
-  celciusTemp = Math.round(response.data.main.temp);
-  document.querySelector("#degree").innerHTML = temp;
-  document.querySelector(
-    "#city-location"
-  ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
-  document.querySelector("#condition").innerHTML =
-    response.data.weather[0].main;
-  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  document.querySelector("#wind-speed").innerHTML = Math.round(
-    response.data.wind.speed
+  temp.innerHTML = Math.round(response.data.main.temp);
+  city.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
+  condition.innerHTML = response.data.weather[0].main;
+  humidity.innerHTML = response.data.main.humidity;
+  windSpeed.innerHTML = Math.round(response.data.wind.speed);
+  pressure.innerHTML = response.data.main.pressure;
+
+  currentDate.innerHTML = formatDate(response.data.dt * 1000);
+  feelsLikeTemp.innerHTML = `${Math.round(response.data.main.feels_like)}°C`;
+
+  weatherIcon.setAttribute(
+    "src",
+    `images/${response.data.weather[0].icon}.png`
   );
-  document.querySelector("#current-date").innerHTML = formatDate(
-    response.data.dt * 1000
-  );
-  document.querySelector("#feels-like").innerHTML = `${Math.round(
-    response.data.main.feels_like
-  )}°C`;
-  celciusTempFeelsLike = Math.round(response.data.main.feels_like);
 
-  document
-    .querySelector("#weather-icon")
-    .setAttribute("src", `images/${response.data.weather[0].icon}.png`);
-
-  let tempMax = Math.round(response.data.main.temp_max);
-  document.querySelector("#temp-max").innerHTML = `${tempMax}°C`;
-  celciusTempMax = Math.round(response.data.main.temp_max);
-
-  let tempMin = Math.round(response.data.main.temp_min);
-  document.querySelector("#temp-min").innerHTML = `${tempMin}°C`;
-  celciusTempMin = Math.round(response.data.main.temp_min);
+  celciusTemp = Math.round(response.data.main.temp); //defines global variable at the bottom
+  celciusTempFeelsLike = Math.round(response.data.main.feels_like); //defines global variable at the bottom
 
   getForecast(response.data.coord);
 }
 
+//2. gets the current weather info from OpenWeather via API - calls the show weather function
 function searchCity(city) {
   let apiKey = "66c2f30e54854e19ab4716b39d0f033f";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -110,6 +127,7 @@ function searchCity(city) {
   axios.get(apiUrl).then(showWeatherCondition);
 }
 
+//1. sets the location, calls weather API function
 function handleSubmit(event) {
   event.preventDefault();
   let city = document.querySelector("#input").value;
@@ -133,19 +151,6 @@ function tempToFahr(event) {
   document.querySelector("#degree").innerHTML = fahrTemp;
 }
 
-function tempToFahrMax(event) {
-  event.preventDefault();
-
-  let tempMaxFahr = Math.round((celciusTempMax * 9) / 5 + 32);
-  document.querySelector("#temp-max").innerHTML = `${tempMaxFahr}°F`;
-}
-
-function tempToCelciusMax(event) {
-  event.preventDefault();
-  let tempMaxCelcius = celciusTempMax;
-  document.querySelector("#temp-max").innerHTML = `${tempMaxCelcius}°C`;
-}
-
 function feelsLikeTempToFahr(event) {
   event.preventDefault();
   let feelsLikeFahr = Math.round((celciusTempFeelsLike * 9) / 5 + 32);
@@ -159,18 +164,10 @@ function feelsLikeTempToCelcius(event) {
 }
 
 let celciusTemp = null; //global variable
-let celciusTempMax = null; //global variable
-let celciusTempMin = null; //global variable
 let celciusTempFeelsLike = null; //global variable
-
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("click", handleSubmit);
 
 let celciusLink = document.querySelector("#celcius-link");
 celciusLink.addEventListener("click", tempToCelcius);
-
-let celciusLinkMax = document.querySelector("#celcius-link");
-celciusLinkMax.addEventListener("click", tempToCelciusMax);
 
 let celciusLinkFeel = document.querySelector("#celcius-link");
 celciusLinkFeel.addEventListener("click", feelsLikeTempToCelcius);
@@ -178,11 +175,11 @@ celciusLinkFeel.addEventListener("click", feelsLikeTempToCelcius);
 let fahrLink = document.querySelector("#fahr-link");
 fahrLink.addEventListener("click", tempToFahr);
 
-let fahrLinkMax = document.querySelector("#fahr-link");
-fahrLinkMax.addEventListener("click", tempToFahrMax);
-
 let fahrLinkFeel = document.querySelector("#fahr-link");
 fahrLinkFeel.addEventListener("click", feelsLikeTempToFahr);
+
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", handleSubmit);
 
 searchCity("Berlin");
 
