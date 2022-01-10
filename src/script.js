@@ -36,7 +36,7 @@ function formatDateSun(timestamp) {
   return `${hours}:${minutes}`;
 }
 
-//defines the weekdays for the forecast
+//function defines the weekdays for the forecast
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
@@ -44,7 +44,7 @@ function formatDay(timestamp) {
   return days[day];
 }
 
-//changes background image depending if day or night
+//function changes background image depending on day or night
 function changeBackgroundColor(response) {
   let icon = response.data.weather[0].icon;
   let outerBox = document.querySelector("#outer-box");
@@ -160,7 +160,7 @@ function handleSubmit(event) {
   let city = document.querySelector("#input").value;
   searchCity(city);
 }
-
+// Changes fahrenheit to celcius unit
 function tempToCelcius(event) {
   event.preventDefault();
   celciusLink.classList.add("active");
@@ -168,7 +168,7 @@ function tempToCelcius(event) {
 
   document.querySelector("#degree").innerHTML = celciusTemp;
 }
-
+// Changes celcius to Fahrehheit unit
 function tempToFahr(event) {
   event.preventDefault();
   celciusLink.classList.remove("active");
@@ -225,7 +225,3 @@ function getCurrentLocation(event) {
 
 let locationButton = document.querySelector("#button-current-location");
 locationButton.addEventListener("click", getCurrentLocation);
-
-//photo day https://www.pexels.com/de-de/@snapwire
-
-//photo night Foto von tommy haugsveen von Pexels
