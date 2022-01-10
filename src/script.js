@@ -44,6 +44,31 @@ function formatDay(timestamp) {
   return days[day];
 }
 
+//changes background image depending if day or night
+function changeBackgroundColor(response) {
+  let icon = response.data.weather[0].icon;
+  let outerBox = document.querySelector("#outer-box");
+
+  if (
+    icon === "01n" ||
+    icon === "02n" ||
+    icon === "04n" ||
+    icon === "09n" ||
+    icon === "10n" ||
+    icon === "11n" ||
+    icon === "13n" ||
+    icon === "50n"
+  ) {
+    document.querySelector("#outer-box").style.backgroundImage =
+      "url('images/sky-night.jpg')";
+    outerBox.classList.add("night-mode");
+  } else {
+    document.querySelector("#outer-box").style.backgroundImage =
+      "url('images/sky-day.jpg')";
+    outerBox.classList.remove("night-mode");
+  }
+}
+
 // 5. Forecast function - loops through the forecast HTML part and displays the forecast
 function displayForecast(response) {
   let forecast = response.data.daily;
@@ -115,6 +140,8 @@ function showWeatherCondition(response) {
 
   celciusTemp = Math.round(response.data.main.temp); //defines global variable at the bottom
   celciusTempFeelsLike = Math.round(response.data.main.feels_like); //defines global variable at the bottom
+
+  changeBackgroundColor(response);
 
   getForecast(response.data.coord);
 }
@@ -198,3 +225,7 @@ function getCurrentLocation(event) {
 
 let locationButton = document.querySelector("#button-current-location");
 locationButton.addEventListener("click", getCurrentLocation);
+
+//photo day https://www.pexels.com/de-de/@snapwire
+
+//photo night Foto von tommy haugsveen von Pexels
