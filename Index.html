@@ -31,8 +31,8 @@
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <div class="container outer-box">
-      <div class="row 1 m-3">
+    <div class="container outer-box night-mode" id="outer-box">
+      <div class="row m-3 justify-content-center align-items-center">
         <div class="col">
           <form class="input-group" id="search-form">
             <input
@@ -42,7 +42,7 @@
               placeholder="Type a city... "
             />
             <div class="input-group-append">
-              <button type="button" class="btn btn-primary search-form-button">
+              <button type="submit" class="btn btn-primary search-form-button">
                 <i class="fas fa-search"></i>
               </button>
             </div>
@@ -54,16 +54,16 @@
         </div>
       </div>
 
-      <div class="row 2 m-3">
+      <div class="row m-4">
         <div class="col">
           <h1>
             <span id="city-location"></span>
-            <div class="current-date" id="current-date"></div>
+            <span class="current-date" id="current-date"></span>
           </h1>
         </div>
       </div>
       <div class="row 3 m-3">
-        <div class="col-4">
+        <div class="col-3">
           <div class="row h-75">
             <div class="col">
               <div>
@@ -75,7 +75,7 @@
             </div>
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-5">
           <div class="row h-50">
             <img
               class="weather-icon"
@@ -95,6 +95,8 @@
             />
             Humidity: <span id="humidity"></span>%
           </div>
+          <br />
+
           <div>
             <img
               src="Images/034-wind.png"
@@ -103,6 +105,7 @@
             />
             Wind Speed: <span id="wind-speed"></span> km/h
           </div>
+          <br />
           <div>
             <img
               src="Images/barometer.png"
