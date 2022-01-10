@@ -74,6 +74,7 @@ button:focus {
   width: 160px;
   position: relative;
   bottom: 18px;
+  left: 16px;
 }
 .condition {
   position: relative;
@@ -138,4 +139,8 @@ button:focus {
 .github-link {
   text-align: center;
   font-size: 12px;
+}
+
+.doNotWrap {
+  white-space: nowrap;
 }
